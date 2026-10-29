@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import argparse
 
 load_dotenv()
 api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -22,4 +23,14 @@ response = client.chat.completions.create(
         }
     ],
 )
+if response.usage == None:
+    raise RuntimeError
+print(f'Prompt tokens: {response.usage.prompt_tokens}\nResponse tokens: {response.usage.completion_tokens}')
+
 print (f"{response.choices[0].message.content}")
+
+parser = argparse.ArgumentParser(description="Chatbot")
+parser.add_argument("user_prompt", type=str, help="User prompt")
+args = parser.parse_args()
+# Now we can access `args.user_prompt`
+content=args.user_prompt
