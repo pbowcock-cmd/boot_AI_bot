@@ -1,6 +1,8 @@
 import os
 
 
+
+
 def write_file(working_directory: str, file_path: str, content: str) -> str:
     try:
         abs_working_dir= os.path.abspath(working_directory)
@@ -22,3 +24,26 @@ def write_file(working_directory: str, file_path: str, content: str) -> str:
 
     except Exception as e:
         return f"Error: {e}"
+
+
+schema_write_file = {
+    "type": "function",
+        "function": {
+            "name": "write_file",
+            "description": "write_file  ",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                "file_path": {
+                "type": "string",
+                "description": " path of file to write",
+                    },
+                "content":{
+                "type": "string",
+                "description": "content to write",
+                    },
+                },
+                "required":["file_path","content"],
+            },
+        },
+    }
